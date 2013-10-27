@@ -3,6 +3,8 @@ ffvc_package
 
 Release package of FFV-C
 
+1.4.7    2013-10-27
+
 1.4.0    2013-09-29
 
 1.3.8    2013-09-13
