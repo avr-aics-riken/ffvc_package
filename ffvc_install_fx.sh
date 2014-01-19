@@ -30,10 +30,10 @@ export OPTF="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg
 export TP_LIB=TextParser-1.4.5
 export PM_LIB=PMlib-1.9.9
 export PLY_LIB=Polylib-2.7.3
-export CUT_LIB=Cutlib-3.1.8
+export CUT_LIB=Cutlib-3.2.0
 export CPM_LIB=CPMlib-1.1.5
 export CIO_LIB=CIOlib-1.4.3
-export FFVC=FFVC-1.5.5
+export FFVC=FFVC-1.5.6
 
 # TextParser
 #
