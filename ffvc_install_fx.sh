@@ -32,8 +32,8 @@ export PM_LIB=PMlib-1.9.9
 export PLY_LIB=Polylib-2.7.3
 export CUT_LIB=Cutlib-3.2.0
 export CPM_LIB=CPMlib-1.1.5
-export CIO_LIB=CIOlib-1.4.3
-export FFVC=FFVC-1.5.6
+export CIO_LIB=CIOlib-1.4.4
+export FFVC=FFVC-1.5.7
 
 # TextParser
 #
