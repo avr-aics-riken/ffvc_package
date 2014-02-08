@@ -1,6 +1,12 @@
 #! /bin/sh
 #
-
+##############################################################################
+#
+# FFV-C Install Shell 
+#
+# Copyright (c) 2014 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
 
 #######################################
 # Edit MACRO for your target machine
@@ -22,15 +28,14 @@ export TMP_F90=mpif90
 #######################################
 
 
-
 # library name
 export TP_LIB=TextParser-1.4.5
 export PM_LIB=PMlib-1.9.9
 export PLY_LIB=Polylib-2.7.3
 export CUT_LIB=Cutlib-3.2.0
 export CPM_LIB=CPMlib-1.1.5
-export CIO_LIB=CIOlib-1.4.4
-export FFVC=FFVC-1.5.7
+export CIO_LIB=CIOlib-1.5.0
+export FFVC=FFVC-1.5.8
 
 # TextParser
 #

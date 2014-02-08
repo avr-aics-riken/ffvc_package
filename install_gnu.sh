@@ -1,11 +1,17 @@
 #! /bin/sh
 #
-
+##############################################################################
+#
+# FFV-C Install Shell 
+#
+# Copyright (c) 2014 Advanced Institute for Computational Science, RIKEN.
+# All rights reserved.
+#
 
 #######################################
 # Edit MACRO for your target machine
 
-export FFVC_HOME=${HOME}/tmp
+export FFVC_HOME=/usr/local/FFV
 
 export TP=${FFVC_HOME}/TextParser
 export PL=${FFVC_HOME}/Polylib
@@ -15,15 +21,11 @@ export CPM=${FFVC_HOME}/CPMlib
 export CIO=${FFVC_HOME}/CIOlib
 export FFV=${FFVC_HOME}/FFVC
 
-export TMP_CC=mpifccpx
-export TMP_CXX=mpiFCCpx
-export TMP_F90=mpifrtpx
-
-export OPTC="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0"
-export OPTF="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc"
+export TMP_CC=mpicc
+export TMP_CXX=mpicxx
+export TMP_F90=mpif90
 
 #######################################
-
 
 
 # library name
@@ -32,8 +34,8 @@ export PM_LIB=PMlib-1.9.9
 export PLY_LIB=Polylib-2.7.3
 export CUT_LIB=Cutlib-3.2.0
 export CPM_LIB=CPMlib-1.1.5
-export CIO_LIB=CIOlib-1.4.4
-export FFVC=FFVC-1.5.7
+export CIO_LIB=CIOlib-1.5.0
+export FFVC=FFVC-1.5.8
 
 # TextParser
 #
@@ -47,8 +49,7 @@ fi
 cd ${TP_LIB}
 ./configure --prefix=$TP \
             CXX=$TMP_CXX \
-            CXXFLAGS="$OPTC" \
-            --host=sparc64-unknown-linux-gnu
+            CXXFLAGS="-O3"
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -71,8 +72,7 @@ fi
 cd ${PM_LIB}
 ./configure --prefix=$PM \
             CXX=$TMP_CXX \
-            CXXFLAGS="$OPTC" \
-            --host=sparc64-unknown-linux-gnu
+            CXXFLAGS="-O3"
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -96,8 +96,7 @@ cd ${PLY_LIB}
 ./configure --prefix=$PL \
             --with-parser=$TP \
             CXX=$TMP_CXX \
-            CXXFLAGS="$OPTC" \
-            --host=sparc64-unknown-linux-gnu
+            CXXFLAGS="-O3 -Wall -fno-strict-aliasing"
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -122,8 +121,7 @@ cd ${CUT_LIB}
             --with-parser=$TP \
             --with-polylib=$PL \
             CXX=$TMP_CXX \
-            CXXFLAGS="$OPTC" \
-            --host=sparc64-unknown-linux-gnu
+            CXXFLAGS="-O3 -Wall -fopenmp"
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -148,12 +146,12 @@ cd ${CPM_LIB}
             --with-pm=$PM \
             --with-parser=$TP \
             --with-comp=FJ \
+            --with-f90example=no \
             CXX=$TMP_CXX \
-            CXXFLAGS="$OPTC" \
+            CXXFLAGS=-O3 \
+            FC=$TMP_F90 \
             F90=$TMP_F90 \
-            F90FLAGS="$OPTF" \
-            --host=sparc64-unknown-linux-gnu \
-            --with-f90example=no
+            F90FLAGS=-O3
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -176,11 +174,10 @@ fi
 cd ${CIO_LIB}
 ./configure --prefix=$CIO \
             --with-parser=$TP \
-            CXX=$TMP_CXX \
-            CXXFLAGS="$OPTC" \
             F90=$TMP_F90 \
-            F90FLAGS="$OPTF" \
-            --host=sparc64-unknown-linux-gnu
+            F90FLAGS="-O3" \
+            CXX=$TMP_CXX \
+            CXXFLAGS=-O3
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -208,14 +205,13 @@ cd ${FFVC}
             --with-pm=$PM \
             --with-polylib=$PL \
             --with-parser=$TP \
-            --with-comp=FJ \
+            --with-comp=GNU \
             CC=$TMP_CC \
-            CFLAGS="$OPTC" \
+            CFLAGS="-O3" \
             CXX=$TMP_CXX \
-            CXXFLAGS="$OPTC" \
+            CXXFLAGS="-O3 -fopenmp" \
             F90=$TMP_F90 \
-            F90FLAGS="$OPTF" \
-            --host=sparc64-unknown-linux-gnu
+            F90FLAGS="-O3 -cpp -fopenmp -ffree-form"
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
