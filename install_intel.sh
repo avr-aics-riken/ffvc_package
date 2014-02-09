@@ -21,7 +21,7 @@ export CPM=${FFVC_HOME}/CPMlib
 export CIO=${FFVC_HOME}/CIOlib
 export FFV=${FFVC_HOME}/FFVC
 
-export TMP_CC=mpicc
+export TMP_CCC=mpicc
 export TMP_CXX=mpicxx
 export TMP_F90=mpif90
 
@@ -34,8 +34,8 @@ export PM_LIB=PMlib-1.9.9
 export PLY_LIB=Polylib-2.7.3
 export CUT_LIB=Cutlib-3.2.0
 export CPM_LIB=CPMlib-1.1.5
-export CIO_LIB=CIOlib-1.5.0
-export FFVC=FFVC-1.5.8
+export CIO_LIB=CIOlib-1.5.2
+export FFVC=FFVC-1.5.9
 
 # TextParser
 #
@@ -49,7 +49,7 @@ fi
 cd ${TP_LIB}
 ./configure --prefix=$TP \
             CXX=$TMP_CXX \
-            CXXFLAGS="-O3"
+            CXXFLAGS="-O3" 
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -72,7 +72,7 @@ fi
 cd ${PM_LIB}
 ./configure --prefix=$PM \
             CXX=$TMP_CXX \
-            CXXFLAGS="-O3"
+            CXXFLAGS="-O3" 
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -96,7 +96,7 @@ cd ${PLY_LIB}
 ./configure --prefix=$PL \
             --with-parser=$TP \
             CXX=$TMP_CXX \
-            CXXFLAGS="-O3 -Wall -fno-strict-aliasing"
+            CXXFLAGS="-O3" 
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -121,7 +121,7 @@ cd ${CUT_LIB}
             --with-parser=$TP \
             --with-polylib=$PL \
             CXX=$TMP_CXX \
-            CXXFLAGS="-O3 -Wall -openmp"
+            CXXFLAGS="-O3 -openmp" 
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -145,13 +145,13 @@ cd ${CPM_LIB}
 ./configure --prefix=$CPM \
             --with-pm=$PM \
             --with-parser=$TP \
-            --with-comp=FJ \
+            --with-comp=INTEL \
             --with-f90example=no \
             CXX=$TMP_CXX \
-            CXXFLAGS=-O3 \
+            CXXFLAGS="-O3" \
             FC=$TMP_F90 \
             F90=$TMP_F90 \
-            F90FLAGS=-O3
+            F90FLAGS="-O3" 
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -177,7 +177,7 @@ cd ${CIO_LIB}
             F90=$TMP_F90 \
             F90FLAGS="-O3" \
             CXX=$TMP_CXX \
-            CXXFLAGS=-O3
+            CXXFLAGS="-O3" 
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -206,12 +206,12 @@ cd ${FFVC}
             --with-polylib=$PL \
             --with-parser=$TP \
             --with-comp=INTEL \
-            CC=$TMP_CC \
+            CCC=$TMP_CCC \
             CFLAGS="-O3" \
             CXX=$TMP_CXX \
             CXXFLAGS="-O3 -openmp -par-report=3 -vec-report=2" \
-            F90=$TMP_F90 \
-            F90FLAGS="-O3 -Warn unused -fpp -openmp -par-report=3 -vec-report=2"
+            F90FLAGS="-O3 -Warn unused -fpp -openmp -par-report=3 -vec-report=2" \
+            F90=$TMP_F90 
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
