@@ -29,13 +29,13 @@ export TMP_F90=mpif90
 
 
 # library name
-export TP_LIB=TextParser-1.4.8
-export PM_LIB=PMlib-2.0.0
-export PLY_LIB=Polylib-3.3.2
-export CUT_LIB=Cutlib-3.2.1
-export CPM_LIB=CPMlib-1.1.6
-export CIO_LIB=CIOlib-1.5.4
-export FFVC=FFVC-1.6.2
+export TP_LIB=TextParser-1.5.0
+export PM_LIB=PMlib-2.0.1
+export PLY_LIB=Polylib-3.3.5
+export CUT_LIB=Cutlib-3.2.2
+export CPM_LIB=CPMlib-1.1.7
+export CIO_LIB=CIOlib-1.5.5
+export FFVC=FFVC-1.6.3
 
 # TextParser
 #
