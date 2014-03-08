@@ -29,13 +29,13 @@ export TMP_F90=mpifrtpx
 
 
 # library name
-export TP_LIB=TextParser-1.5.0
-export PM_LIB=PMlib-2.0.1
-export PLY_LIB=Polylib-3.3.5
+export TP_LIB=TextParser-1.5.1
+export PM_LIB=PMlib-2.0.2
+export PLY_LIB=Polylib-3.3.8
 export CUT_LIB=Cutlib-3.2.2
 export CPM_LIB=CPMlib-1.1.7
 export CIO_LIB=CIOlib-1.5.5
-export FFVC=FFVC-1.6.4
+export FFVC=FFVC-1.6.5
 
 # TextParser
 #
@@ -121,7 +121,7 @@ cd ${CUT_LIB}
             --with-parser=$TP \
             --with-polylib=$PL \
             CXX=$TMP_CXX \
-            CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0 -openmp" --host=sparc64-unknown-linux-gnu
+            CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
