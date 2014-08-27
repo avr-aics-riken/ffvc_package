@@ -9,6 +9,28 @@
 #
 
 #######################################
+#
+# Double precision Option
+#
+# $ ./install_*.sh double
+#
+#######################################
+
+# Default Precision
+export PRCSN1=float
+export PRCSN2=4
+
+arg=$1
+
+if [ "${arg}" = "double" ]; then
+export PRCSN1=double
+export PRCSN2=8
+fi
+
+echo $PRCSN1
+echo $PRCSN2
+
+#######################################
 # Edit MACRO for your target machine
 
 export FFVC_HOME=/usr/local/FFV
@@ -35,7 +57,7 @@ export PLY_LIB=Polylib-3.4.7
 export CUT_LIB=Cutlib-3.2.5
 export CPM_LIB=CPMlib-1.2.2
 export CIO_LIB=CIOlib-1.5.8
-export FFVC=FFVC-1.8.1
+export FFVC=FFVC-1.8.2
 
 # TextParser
 #
@@ -95,6 +117,7 @@ fi
 cd ${PLY_LIB}
 ./configure --prefix=$PL \
             --with-parser=$TP \
+            --with-real=$PRCSN1 \
             CXX=$TMP_CXX \
             CXXFLAGS="-O3" 
 make
@@ -147,6 +170,7 @@ cd ${CPM_LIB}
             --with-parser=$TP \
             --with-comp=INTEL \
             --with-f90example=no \
+            --with-f90real=$PRCSN2 \
             CXX=$TMP_CXX \
             CXXFLAGS="-O3" \
             FC=$TMP_F90 \
@@ -206,6 +230,7 @@ cd ${FFVC}
             --with-polylib=$PL \
             --with-parser=$TP \
             --with-comp=INTEL \
+            --with-precision=$PRCSN1 \
             CCC=$TMP_CCC \
             CFLAGS="-O3" \
             CXX=$TMP_CXX \
