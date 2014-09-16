@@ -21,9 +21,12 @@ Option : If you want to compile with double precision, please invoke install she
 
 ## Note
 
+### 1.8.5 `2014-09-16`
+- Implement central scheme 2nd & 4th 
+
 ### 1.8.2  `2014-08-27`
-- Confrim compilation with double precision.
+- Confirm compilation with double precision.
 
 ### 1.7.4  `2014-03-19`
-- On some environemnt, currently, we have a problem.
+- On some environment, currently, we have a problem.
 - If you compile this package with Intel mpi, please add -mt_mpi for CFLAGS, CXXFLAGS and F90FLAGS in install_intel.sh. Also, In case you see an error message "missing path to POLYmpi" when ffvc is invoked, please add path to POLYmpi for LD_LIBRARY_PATH.
