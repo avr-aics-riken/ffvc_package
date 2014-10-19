@@ -37,7 +37,7 @@ export PL=${FFVC_HOME}/Polylib
 export CT=${FFVC_HOME}/Cutlib
 export PM=${FFVC_HOME}/PMlib
 export CPM=${FFVC_HOME}/CPMlib
-export CIO=${FFVC_HOME}/CIOlib
+export CDM=${FFVC_HOME}/CDMlib
 export FFV=${FFVC_HOME}/FFVC
 
 export TMP_CCC=mpicc
@@ -48,13 +48,13 @@ export TMP_F90=mpif90
 
 
 # library name
-export TP_LIB=TextParser-1.5.6
+export TP_LIB=TextParser-1.5.7
 export PM_LIB=PMlib-2.1.4
 export PLY_LIB=Polylib-3.4.7
 export CUT_LIB=Cutlib-3.2.5
 export CPM_LIB=CPMlib-1.2.2
-export CIO_LIB=CIOlib-1.5.8
-export FFVC=FFVC-1.8.5
+export CDM_LIB=CDMlib-0.2.0
+export FFVC=FFVC-1.8.9
 
 # TextParser
 #
@@ -183,17 +183,17 @@ cd ..
 
 
 
-# CIOlib
+# CDMlib
 #
 echo
 echo -----------------------------
-echo CIOlib
+echo CDMlib
 echo
-if [ ! -d ${CIO_LIB} ]; then
-  tar xvzf ${CIO_LIB}.tar.gz
+if [ ! -d ${CDM_LIB} ]; then
+  tar xvzf ${CDM_LIB}.tar.gz
 fi
-cd ${CIO_LIB}
-./configure --prefix=$CIO \
+cd ${CDM_LIB}
+./configure --prefix=$CDM \
             --with-parser=$TP \
             F90=$TMP_F90 \
             F90FLAGS="-O3" \
@@ -221,7 +221,7 @@ fi
 cd ${FFVC}
 ./configure --prefix=$FFV \
             --with-cpm=$CPM \
-            --with-cio=$CIO \
+            --with-cdm=$CDM \
             --with-cut=$CT \
             --with-pm=$PM \
             --with-polylib=$PL \
