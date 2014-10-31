@@ -54,7 +54,7 @@ export PLY_LIB=Polylib-3.4.7
 export CUT_LIB=Cutlib-3.2.5
 export CPM_LIB=CPMlib-1.2.2
 export CDM_LIB=CDMlib-0.4.0
-export FFVC=FFVC-1.9.3
+export FFVC=FFVC-1.9.4
 
 # TextParser
 #
@@ -192,7 +192,7 @@ echo
 if [ ! -d ${CDM_LIB} ]; then
   tar xvzf ${CDM_LIB}.tar.gz
 fi
-cd ${DMO_LIB}
+cd ${CDM_LIB}
 ./configure --prefix=$CDM \
             --with-parser=$TP \
             F90=$TMP_F90 \
