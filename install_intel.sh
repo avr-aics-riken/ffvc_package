@@ -49,12 +49,12 @@ export TMP_F90=mpif90
 
 # library name
 export TP_LIB=TextParser-1.5.7
-export PM_LIB=PMlib-3.0.1
+export PM_LIB=PMlib-3.0.2
 export PLY_LIB=Polylib-3.4.7
 export CUT_LIB=Cutlib-3.2.5
-export CPM_LIB=CPMlib-1.2.2
-export CDM_LIB=CDMlib-0.7.1
-export FFVC=FFVC-2.0.2
+export CPM_LIB=CPMlib-1.2.3
+export CDM_LIB=CDMlib-0.7.2
+export FFVC=FFVC-2.0.3
 
 # TextParser
 #
@@ -231,8 +231,8 @@ cd ${FFVC}
             CCC=$TMP_CCC \
             CFLAGS="-O3" \
             CXX=$TMP_CXX \
-            CXXFLAGS="-O3 -openmp -qopt-report=5" \
-            F90FLAGS="-O3 -Warn unused -fpp -openmp -qopt-report=5" \
+            CXXFLAGS="-O3 -openmp -par-report=3 -vec-report=2" \
+            F90FLAGS="-O3 -Warn unused -fpp -openmp -par-report=3 -vec-report=2" \
             F90=$TMP_F90 
 make
 if [ $? -ne 0 ]; then
