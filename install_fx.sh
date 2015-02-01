@@ -34,7 +34,6 @@ export FFVC_HOME=/usr/local/FFV
 
 export TP=${FFVC_HOME}/TextParser
 export PL=${FFVC_HOME}/Polylib
-export CT=${FFVC_HOME}/Cutlib
 export PM=${FFVC_HOME}/PMlib
 export CPM=${FFVC_HOME}/CPMlib
 export CDM=${FFVC_HOME}/CDMlib
@@ -51,10 +50,9 @@ export TMP_F90=mpifrtpx
 export TP_LIB=TextParser-1.5.7
 export PM_LIB=PMlib-3.0.2
 export PLY_LIB=Polylib-3.4.7
-export CUT_LIB=Cutlib-3.2.5
 export CPM_LIB=CPMlib-1.2.3
-export CDM_LIB=CDMlib-0.7.2
-export FFVC=FFVC-2.0.3
+export CDM_LIB=CDMlib-0.7.4
+export FFVC=FFVC-2.0.8
 
 # TextParser
 #
@@ -125,30 +123,6 @@ fi
 make install
 cd ..
 
-
-
-# Cutlib
-#
-echo
-echo -----------------------------
-echo Install Cutlib
-echo
-if [ ! -d ${CUT_LIB} ]; then
-  tar xvzf ${CUT_LIB}.tar.gz
-fi
-cd ${CUT_LIB}
-./configure --prefix=$CT \
-            --with-parser=$TP \
-            --with-polylib=$PL \
-            CXX=$TMP_CXX \
-            CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
-make
-if [ $? -ne 0 ]; then
-  echo "make error!"
-  exit
-fi
-make install
-cd ..
 
 
 
@@ -222,7 +196,6 @@ cd ${FFVC}
 ./configure --prefix=$FFV \
             --with-cpm=$CPM \
             --with-cdm=$CDM \
-            --with-cut=$CT \
             --with-pm=$PM \
             --with-polylib=$PL \
             --with-parser=$TP \
