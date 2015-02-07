@@ -21,6 +21,9 @@ Option : If you want to compile with double precision, please invoke install she
 
 ## Note
 
+### 2.1.0 `2015-02-07`
+- change parameters which pass to CPMlib
+
 ### 1.8.5 `2014-09-16`
 - Implement central scheme 2nd & 4th 
 
