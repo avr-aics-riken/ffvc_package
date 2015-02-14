@@ -52,7 +52,8 @@ export PM_LIB=PMlib-3.0.2
 export PLY_LIB=Polylib-3.4.7
 export CPM_LIB=CPMlib-1.2.3
 export CDM_LIB=CDMlib-0.7.4
-export FFVC=FFVC-2.0.8
+export FFVC=FFVC-2.1.2
+
 
 # TextParser
 #
