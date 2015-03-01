@@ -30,14 +30,7 @@ fi
 #######################################
 # Edit MACRO for your target machine
 
-export FFVC_HOME=/usr/local/FFV
-
-export TP=${FFVC_HOME}/TextParser
-export PL=${FFVC_HOME}/Polylib
-export PM=${FFVC_HOME}/PMlib
-export CPM=${FFVC_HOME}/CPMlib
-export CDM=${FFVC_HOME}/CDMlib
-export FFV=${FFVC_HOME}/FFVC
+#export FFV_HOME=hogehoge
 
 export TMP_CCC=mpicc
 export TMP_CXX=mpicxx
@@ -49,10 +42,10 @@ export TMP_F90=mpif90
 # library name
 export TP_LIB=TextParser-1.5.7
 export PM_LIB=PMlib-3.0.2
-export PLY_LIB=Polylib-3.4.7
+export PLY_LIB=Polylib-3.4.8
 export CPM_LIB=CPMlib-1.2.3
-export CDM_LIB=CDMlib-0.7.4
-export FFVC=FFVC-2.1.2
+export CDM_LIB=CDMlib-0.7.6
+export FFVC=FFVC-2.1.5
 
 
 # TextParser
@@ -65,7 +58,7 @@ if [ ! -d ${TP_LIB} ]; then
   tar xvzf ${TP_LIB}.tar.gz
 fi
 cd ${TP_LIB}
-./configure --prefix=$TP \
+./configure --prefix=${FFV_HOME}/TextParser \
             CXX=$TMP_CXX \
             CXXFLAGS="-O3" 
 make
@@ -88,7 +81,7 @@ if [ ! -d ${PM_LIB} ]; then
   tar xvzf ${PM_LIB}.tar.gz
 fi
 cd ${PM_LIB}
-./configure --prefix=$PM \
+./configure --prefix=${FFV_HOME}/PMlib \
             CXX=$TMP_CXX \
             CXXFLAGS="-O3" 
 make
@@ -111,8 +104,8 @@ if [ ! -d ${PLY_LIB} ]; then
   tar xvzf ${PLY_LIB}.tar.gz
 fi
 cd ${PLY_LIB}
-./configure --prefix=$PL \
-            --with-parser=$TP \
+./configure --prefix=${FFV_HOME}/Polylib \
+            --with-parser=${FFV_HOME}/TextParser \
             --with-real=$PRCSN1 \
             CXX=$TMP_CXX \
             CXXFLAGS="-O3" 
@@ -137,9 +130,9 @@ if [ ! -d ${CPM_LIB} ]; then
   tar xvzf ${CPM_LIB}.tar.gz
 fi
 cd ${CPM_LIB}
-./configure --prefix=$CPM \
-            --with-pm=$PM \
-            --with-parser=$TP \
+./configure --prefix=${FFV_HOME}/CPMlib \
+            --with-pm=${FFV_HOME}/PMlib \
+            --with-parser=${FFV_HOME}/TextParser \
             --with-comp=GNU \
             --with-f90example=no \
             --with-f90real=$PRCSN2 \
@@ -168,8 +161,8 @@ if [ ! -d ${CDM_LIB} ]; then
   tar xvzf ${CDM_LIB}.tar.gz
 fi
 cd ${CDM_LIB}
-./configure --prefix=$CDM \
-            --with-parser=$TP \
+./configure --prefix=${FFV_HOME}/CDMlib \
+            --with-parser=${FFV_HOME}/TextParser \
             F90=$TMP_F90 \
             F90FLAGS="-O3" \
             CXX=$TMP_CXX \
@@ -194,12 +187,12 @@ if [ ! -d ${FFVC} ]; then
   tar xvzf ${FFVC}.tar.gz
 fi
 cd ${FFVC}
-./configure --prefix=$FFV \
-            --with-cpm=$CPM \
-            --with-cdm=$CDM \
-            --with-pm=$PM \
-            --with-polylib=$PL \
-            --with-parser=$TP \
+./configure --prefix=${FFV_HOME}/FFVC \
+            --with-cpm=${FFV_HOME}/CPMlib \
+            --with-cdm=${FFV_HOME}/CDMlib \
+            --with-pm=${FFV_HOME}/PMlib\
+            --with-polylib=${FFV_HOME}/Polylib \
+            --with-parser=${FFV_HOME}/TextParser \
             --with-comp=GNU \
             --with-precision=$PRCSN1 \
             CCC=$TMP_CCC \

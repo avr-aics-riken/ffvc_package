@@ -4,11 +4,14 @@ Release package of FFV-C and related libraries.
 
 
 ## Install
-Just type "./install_intel.sh" on Intel platform. Other platforms too.
+1) set a environment variable FFV_HOME
+  $ export FFV_HOME=/hogehoge
 
-Option : If you want to compile with double precision, please invoke install shell with 'double' option.
-	
-	$ ./install_intel.sh double
+2) Type install shell script. For example, install_intel.sh for Intel platform.
+  $ ./install_intel.sh
+
+3) If you want to compile with double precision, please invoke install shell with 'double' option.
+  $ ./install_intel.sh double
 
 
 
