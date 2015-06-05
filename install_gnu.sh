@@ -83,7 +83,9 @@ fi
 cd ${PM_LIB}
 ./configure --prefix=${FFV_HOME}/PMlib \
             CXX=$TMP_CXX \
-            CXXFLAGS="-O3" 
+            CXXFLAGS="-O3"  \
+            CC=$TMP_CCC \
+            CFLAGS="-O3" 
 make
 if [ $? -ne 0 ]; then
   echo "make error!"

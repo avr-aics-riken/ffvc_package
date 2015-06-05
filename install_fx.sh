@@ -83,7 +83,9 @@ fi
 cd ${PM_LIB}
 ./configure --prefix=${FFV_HOME}/PMlib \
             CXX=$TMP_CXX \
-            CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
+            CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu \
+            CC=$TMP_CCC \
+            CFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
