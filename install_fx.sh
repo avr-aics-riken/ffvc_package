@@ -4,7 +4,7 @@
 #
 # FFV-C Install Shell 
 #
-# Copyright (c) 2014 Advanced Institute for Computational Science, RIKEN.
+# Copyright (c) 2014-2015 Advanced Institute for Computational Science, RIKEN.
 # All rights reserved.
 #
 
@@ -40,12 +40,12 @@ export TMP_F90=mpifrtpx
 
 
 # library name
-export TP_LIB=TextParser-1.5.7
-export PM_LIB=PMlib-3.0.2
-export PLY_LIB=Polylib-3.4.8
-export CPM_LIB=CPMlib-1.2.3
-export CDM_LIB=CDMlib-0.7.6
-export FFVC=FFVC-2.1.5
+export TP_LIB=TextParser-1.5.8
+export PM_LIB=PMlib-3.0.3
+export PLY_LIB=Polylib-3.4.9
+export CPM_LIB=CPMlib-1.2.4
+export CDM_LIB=CDMlib-0.7.8
+export FFVC=FFVC-2.1.7
 
 
 # TextParser

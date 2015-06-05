@@ -15,7 +15,7 @@ Release package of FFV-C and related libraries.
 
 
 
-## Platform and compilers
+## Supported platforms and compilers
 	install_intel.sh; Intel arch. and Intel compiler
 	install_gnu.sh;   Intel arch. and gnu compiler
 	install_fx.sh;    Sparc fx arch. and Fujitsu compiler
