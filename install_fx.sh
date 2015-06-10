@@ -4,7 +4,7 @@
 #
 # FFV-C Install Shell 
 #
-# Copyright (c) 2014-2015 Advanced Institute for Computational Science, RIKEN.
+# Copyright (c) 2014 Advanced Institute for Computational Science, RIKEN.
 # All rights reserved.
 #
 
@@ -40,12 +40,12 @@ export TMP_F90=mpifrtpx
 
 
 # library name
-export TP_LIB=TextParser-1.5.8
-export PM_LIB=PMlib-3.0.3
-export PLY_LIB=Polylib-3.4.9
-export CPM_LIB=CPMlib-1.2.4
-export CDM_LIB=CDMlib-0.7.8
-export FFVC=FFVC-2.1.7
+export TP_LIB=TextParser-1.6.1
+export PM_LIB=PMlib-3.1.0
+export PLY_LIB=Polylib-3.5.1
+export CPM_LIB=CPMlib-2.0.2
+export CDM_LIB=CDMlib-0.8.1
+export FFVC=FFVC-2.2.0
 
 
 # TextParser
@@ -57,17 +57,17 @@ echo
 if [ ! -d ${TP_LIB} ]; then
   tar xvzf ${TP_LIB}.tar.gz
 fi
-cd ${TP_LIB}
-./configure --prefix=${FFV_HOME}/TextParser \
-            CXX=$TMP_CXX \
-            CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
+cd ${TP_LIB}/BUILD_DIR
+../configure --prefix=${FFV_HOME}/TextParser \
+             CXX=$TMP_CXX \
+             CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
   exit
 fi
 make install
-cd ..
+cd ../..
 
 
 
@@ -80,19 +80,19 @@ echo
 if [ ! -d ${PM_LIB} ]; then
   tar xvzf ${PM_LIB}.tar.gz
 fi
-cd ${PM_LIB}
-./configure --prefix=${FFV_HOME}/PMlib \
-            CXX=$TMP_CXX \
-            CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu \
-            CC=$TMP_CCC \
-            CFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
+cd ${PM_LIB}/BUILD_DIR
+../configure --prefix=${FFV_HOME}/PMlib \
+             CXX=$TMP_CXX \
+             CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu \
+             CC=$TMP_CCC \
+             CFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
   exit
 fi
 make install
-cd ..
+cd ../..
 
 
 
@@ -105,19 +105,19 @@ echo
 if [ ! -d ${PLY_LIB} ]; then
   tar xvzf ${PLY_LIB}.tar.gz
 fi
-cd ${PLY_LIB}
-./configure --prefix=${FFV_HOME}/Polylib \
-            --with-parser=${FFV_HOME}/TextParser \
-            --with-real=$PRCSN1 \
-            CXX=$TMP_CXX \
-            CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
+cd ${PLY_LIB}/BUILD_DIR
+../configure --prefix=${FFV_HOME}/Polylib \
+             --with-parser=${FFV_HOME}/TextParser \
+             --with-real=$PRCSN1 \
+             CXX=$TMP_CXX \
+             CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
   exit
 fi
 make install
-cd ..
+cd ../..
 
 
 
@@ -131,25 +131,25 @@ echo
 if [ ! -d ${CPM_LIB} ]; then
   tar xvzf ${CPM_LIB}.tar.gz
 fi
-cd ${CPM_LIB}
-./configure --prefix=${FFV_HOME}/CPMlib \
-            --with-pm=${FFV_HOME}/PMlib \
-            --with-parser=${FFV_HOME}/TextParser \
-            --with-comp=FJ \
-            --with-f90example=no \
-            --with-f90real=$PRCSN2 \
-            CXX=$TMP_CXX \
-            CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" \
-            FC=$TMP_F90 \
-            F90=$TMP_F90 \
-            F90FLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc" --host=sparc64-unknown-linux-gnu
+cd ${CPM_LIB}/BUILD_DIR
+../configure --prefix=${FFV_HOME}/CPMlib \
+             --with-pm=${FFV_HOME}/PMlib \
+             --with-parser=${FFV_HOME}/TextParser \
+             --with-comp=FJ \
+             --with-f90example=no \
+             --with-f90real=$PRCSN2 \
+             CXX=$TMP_CXX \
+             CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" \
+             FC=$TMP_F90 \
+             F90=$TMP_F90 \
+             F90FLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc" --host=sparc64-unknown-linux-gnu
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
   exit
 fi
 make install
-cd ..
+cd ../..
 
 
 
@@ -162,20 +162,20 @@ echo
 if [ ! -d ${CDM_LIB} ]; then
   tar xvzf ${CDM_LIB}.tar.gz
 fi
-cd ${CDM_LIB}
-./configure --prefix=${FFV_HOME}/CDMlib \
-            --with-parser=${FFV_HOME}/TextParser \
-            F90=$TMP_F90 \
-            F90FLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc" \
-            CXX=$TMP_CXX \
-            CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
+cd ${CDM_LIB}/BUILD_DIR
+../configure --prefix=${FFV_HOME}/CDMlib \
+             --with-parser=${FFV_HOME}/TextParser \
+             F90=$TMP_F90 \
+             F90FLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc" \
+             CXX=$TMP_CXX \
+             CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" --host=sparc64-unknown-linux-gnu
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
   exit
 fi
 make install
-cd ..
+cd ../..
 
 
 
@@ -188,26 +188,26 @@ echo
 if [ ! -d ${FFVC} ]; then
   tar xvzf ${FFVC}.tar.gz
 fi
-cd ${FFVC}
-./configure --prefix=${FFV_HOME}/FFVC \
-            --with-cpm=${FFV_HOME}/CPMlib \
-            --with-cdm=${FFV_HOME}/CDMlib \
-            --with-pm=${FFV_HOME}/PMlib\
-            --with-polylib=${FFV_HOME}/Polylib \
-            --with-parser=${FFV_HOME}/TextParser \
-            --with-comp=FJ \
-            --with-precision=$PRCSN1 \
-            CCC=$TMP_CCC \
-            CFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" \
-            CXX=$TMP_CXX \
-            CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" \
-            F90FLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc" \
-            F90=$TMP_F90 --host=sparc64-unknown-linux-gnu
+cd ${FFVC}/BUILD_DIR
+../configure --prefix=${FFV_HOME}/FFVC \
+             --with-cpm=${FFV_HOME}/CPMlib \
+             --with-cdm=${FFV_HOME}/CDMlib \
+             --with-pm=${FFV_HOME}/PMlib\
+             --with-polylib=${FFV_HOME}/Polylib \
+             --with-parser=${FFV_HOME}/TextParser \
+             --with-comp=FJ \
+             --with-precision=$PRCSN1 \
+             CCC=$TMP_CCC \
+             CFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" \
+             CXX=$TMP_CXX \
+             CXXFLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc -x0" \
+             F90FLAGS="-Kfast,ocl,preex,simd=2,uxsimd,array_private,parallel,openmp,optmsg=2 -V -Nsrc" \
+             F90=$TMP_F90 --host=sparc64-unknown-linux-gnu
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
   exit
 fi
 make install
-cd ..
+cd ../..
 
