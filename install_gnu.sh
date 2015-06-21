@@ -43,9 +43,9 @@ export TMP_F90=mpif90
 export TP_LIB=TextParser-1.6.3
 export PM_LIB=PMlib-3.1.1
 export PLY_LIB=Polylib-3.5.2
-export CPM_LIB=CPMlib-2.0.2
+export CPM_LIB=CPMlib-2.0.3
 export CDM_LIB=CDMlib-0.8.1
-export FFVC=FFVC-2.2.1
+export FFVC=FFVC-2.2.3
 
 
 # TextParser
@@ -136,6 +136,7 @@ cd ${CPM_LIB}/BUILD_DIR
              --with-pm=${FFV_HOME}/PMlib \
              --with-parser=${FFV_HOME}/TextParser \
              --with-comp=GNU \
+             --with-example=no \
              --with-f90example=no \
              --with-f90real=$PRCSN2 \
              CXX=$TMP_CXX \
