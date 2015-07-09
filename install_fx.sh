@@ -42,10 +42,10 @@ export TMP_F90=mpifrtpx
 # library name
 export TP_LIB=TextParser-1.6.3
 export PM_LIB=PMlib-3.1.1
-export PLY_LIB=Polylib-3.5.2
-export CPM_LIB=CPMlib-2.0.4
+export PLY_LIB=Polylib-3.5.3
+export CPM_LIB=CPMlib-2.0.5
 export CDM_LIB=CDMlib-0.8.1
-export FFVC=FFVC-2.3.4
+export FFVC=FFVC-2.3.8
 
 
 # TextParser
