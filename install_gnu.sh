@@ -40,12 +40,12 @@ export TMP_F90=mpif90
 
 
 # library name
-export TP_LIB=TextParser-1.6.3
-export PM_LIB=PMlib-3.1.2
+export TP_LIB=TextParser-1.6.4
+export PM_LIB=PMlib-4.1.3
 export PLY_LIB=Polylib-3.5.3
 export CPM_LIB=CPMlib-2.1.0
 export CDM_LIB=CDMlib-0.8.1
-export FFVC=FFVC-2.3.14
+export FFVC=FFVC-2.4.1
 
 
 # TextParser
@@ -202,7 +202,7 @@ cd ${FFVC}/BUILD_DIR
              CFLAGS="-O3" \
              CXX=$TMP_CXX \
              CXXFLAGS="-O3 -fopenmp" \
-             F90FLAGS="-O3 -cpp -fopenmp -ffree-form" \
+             F90FLAGS="-O3 -cpp -fopenmp -ffree-form --free-line-length-none" \
              F90=$TMP_F90 
 make
 if [ $? -ne 0 ]; then
