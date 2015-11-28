@@ -31,7 +31,7 @@ fi
 # Edit MACRO for your target machine
 
 export FFV_HOME=~/FFV
-export TMP_LDFLAGS=-L/usr/local/gfortran/lib
+export TMP_LDFLAGS=
 
 export TMP_CCC=mpicc
 export TMP_CXX=mpicxx
