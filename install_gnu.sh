@@ -30,7 +30,8 @@ fi
 #######################################
 # Edit MACRO for your target machine
 
-#export FFV_HOME=hogehoge
+export FFV_HOME=~/FFV
+export TMP_LDFLAGS=-L/usr/local/gfortran/lib
 
 export TMP_CCC=mpicc
 export TMP_CXX=mpicxx
@@ -40,12 +41,12 @@ export TMP_F90=mpif90
 
 
 # library name
-export TP_LIB=TextParser-1.6.4
-export PM_LIB=PMlib-4.1.3
-export PLY_LIB=Polylib-3.5.3
-export CPM_LIB=CPMlib-2.1.0
-export CDM_LIB=CDMlib-0.8.1
-export FFVC=FFVC-2.4.1
+export TP_LIB=TextParser-1.6.5
+export PM_LIB=PMlib-4.2.2
+export PLY_LIB=Polylib-3.5.4
+export CPM_LIB=CPMlib-2.1.2
+export CDM_LIB=CDMlib-0.9.3
+export FFVC=FFVC-2.4.2
 
 
 # TextParser
@@ -57,8 +58,10 @@ echo
 if [ ! -d ${TP_LIB} ]; then
   tar xvzf ${TP_LIB}.tar.gz
 fi
+autoreconf -i
 cd ${TP_LIB}/BUILD_DIR
 ../configure --prefix=${FFV_HOME}/TextParser \
+             --with-comp=GNU \
              CXX=$TMP_CXX \
              CXXFLAGS="-O3" 
 make
@@ -80,8 +83,10 @@ echo
 if [ ! -d ${PM_LIB} ]; then
   tar xvzf ${PM_LIB}.tar.gz
 fi
+autoreconf -i
 cd ${PM_LIB}/BUILD_DIR
 ../configure --prefix=${FFV_HOME}/PMlib \
+             --with-comp=GNU \
              CXX=$TMP_CXX \
              CXXFLAGS="-O3"  \
              CC=$TMP_CCC \
@@ -105,6 +110,7 @@ echo
 if [ ! -d ${PLY_LIB} ]; then
   tar xvzf ${PLY_LIB}.tar.gz
 fi
+autoreconf -i
 cd ${PLY_LIB}/BUILD_DIR
 ../configure --prefix=${FFV_HOME}/Polylib \
              --with-parser=${FFV_HOME}/TextParser \
@@ -131,6 +137,7 @@ echo
 if [ ! -d ${CPM_LIB} ]; then
   tar xvzf ${CPM_LIB}.tar.gz
 fi
+autoreconf -i
 cd ${CPM_LIB}/BUILD_DIR
 ../configure --prefix=${FFV_HOME}/CPMlib \
              --with-pm=${FFV_HOME}/PMlib \
@@ -141,9 +148,9 @@ cd ${CPM_LIB}/BUILD_DIR
              --with-f90real=$PRCSN2 \
              CXX=$TMP_CXX \
              CXXFLAGS="-O3" \
-             FC=$TMP_F90 \
              F90=$TMP_F90 \
-             F90FLAGS="-O3" 
+             F90FLAGS="-O3"  \
+             LDFLAGS=$TMP_LDFLAGS
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -163,6 +170,7 @@ echo
 if [ ! -d ${CDM_LIB} ]; then
   tar xvzf ${CDM_LIB}.tar.gz
 fi
+autoreconf -i
 cd ${CDM_LIB}/BUILD_DIR
 ../configure --prefix=${FFV_HOME}/CDMlib \
              --with-parser=${FFV_HOME}/TextParser \
@@ -189,6 +197,7 @@ echo
 if [ ! -d ${FFVC} ]; then
   tar xvzf ${FFVC}.tar.gz
 fi
+autoreconf -i
 cd ${FFVC}/BUILD_DIR
 ../configure --prefix=${FFV_HOME}/FFVC \
              --with-cpm=${FFV_HOME}/CPMlib \
@@ -203,7 +212,8 @@ cd ${FFVC}/BUILD_DIR
              CXX=$TMP_CXX \
              CXXFLAGS="-O3 -fopenmp" \
              F90FLAGS="-O3 -cpp -fopenmp -ffree-form --free-line-length-none" \
-             F90=$TMP_F90 
+             F90=$TMP_F90  \
+             LDFLAGS=$TMP_LDFLAGS
 make
 if [ $? -ne 0 ]; then
   echo "make error!"
@@ -211,4 +221,3 @@ if [ $? -ne 0 ]; then
 fi
 make install
 cd ../..
-

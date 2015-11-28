@@ -4,11 +4,20 @@ Release package of FFV-C and related libraries.
 
 
 ## Install
-1) set a environment variable FFV_HOME
-  $ export FFV_HOME=/hogehoge
+1) edit environment variables
+  
+FFV_HOME = Install directory, default directory is ~/FFV
+TMP_LDFLAGS = Directory path for fortran libraries
+
+In case of the GNU compiler, you may need to specify TMP_LDFLAGS, that includes
+fortran library.
+
+
 
 2) Type install shell script. For example, install_intel.sh for Intel platform.
   $ ./install_intel.sh
+
+
 
 3) If you want to compile with double precision, please invoke install shell with 'double' option.
   $ ./install_intel.sh double
