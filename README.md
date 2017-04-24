@@ -1,42 +1,46 @@
-# ffvc_package
+# FFVC_package
 
-Release package of FFV-C and related libraries.
+Release package of FFVC and related libraries.
+
+
+
+## Copyright
+- Copyright (c) 2007-2011 VCAD System Research Program, RIKEN.  All rights reserved.
+- Copyright (c) 2011-2015 Institute of Industrial Science, The University of Tokyo.  All rights reserved.
+- Copyright (c) 2012-2016 Advanced Institute for Computational Science, RIKEN.  All rights reserved.
+- Copyright (c) 2016-2017 Research Institute for Information Technology(RIIT), Kyushu University.  All rights reserved.
+
+
+## Software Requirement
+
+- Cmake
+- MPI library (In case of parallel version)
+- TextParser (included in this package)
+- PMlib (included in this package)
+- Polylib (included in this package)
+- CPMlib (included in this package)
+- CDMlib (included in this package)
 
 
 ## Install
-1) edit environment variables
-  
-FFV_HOME = Install directory, default directory is ~/FFV
-TMP_LDFLAGS = Directory path for fortran libraries
+Type install shell script on command line with options .
 
-In case of the GNU compiler, you may need to specify TMP_LDFLAGS, that includes
-fortran library.
-
-
-
-2) Type install shell script. For example, install_intel.sh for Intel platform.
-  $ ./install_intel.sh
-
-
-
-3) If you want to compile with double precision, please invoke install shell with 'double' option.
-  $ ./install_intel.sh double
-
+~~~
+$ export CC=... CXX=... F90=... FC=...
+$ ./install.sh <intel|fx10|K> <INST_DIR> {serial|mpi} {double|float}
+~~~
 
 
 ## Supported platforms and compilers
-	install_intel.sh; Intel arch. and Intel compiler
-	install_gnu.sh;   Intel arch. and gnu compiler
-	install_fx.sh;    Sparc fx arch. and Fujitsu compiler
+
+* Linux Intel arch., Intel/GNU compilers.
+* Mac OSX, Intel/GNU compilers.
+* Sparc fx arch. and Fujitsu compiler.
 
 
 
-## Note
+## Contributors
 
-### 2.0.8 `2015-02-01`
-- new algorithm for a geometry process
-- 9 bits expression for cut length
-- expire exploiting cutlib
+- Kenji Ono *keno@cc.kyushu-u.ac.jp*
 
-### 1.8.5 `2014-09-16`
-- Implement central scheme 2nd & 4th 
+
