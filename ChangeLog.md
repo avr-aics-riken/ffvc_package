@@ -10,7 +10,7 @@ A package of FFVC with related libraries.
 |:--|:--:|:--:|:--|
 |Intel / Intel 17.0.1 ||ok^(1)|Apple MacBook Pro OSX 10.12.4|
 |Intel / GNU 6.2.0    ||ok^(1)|Apple MacBook Pro OSX 10.12.4|
-|Fujitsu / fx10       |||
+|Fujitsu / fx10       ||ok|Hayaka /opt/FJSVfxlang/1.2.1|
 |Fujitsu / fx100      |||
 |Fujitsu / K          |||
 
@@ -19,6 +19,9 @@ A package of FFVC with related libraries.
 
 ## RELEASE HISTORY
   
+---
+- 2017-04-24 Version 2.5.1
+  - FFVC-2.5.1
 
 ---
 - 2017-04-22 Version 2.5.0

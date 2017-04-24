@@ -42,5 +42,14 @@ $ ./install.sh <intel|fx10|K> <INST_DIR> {serial|mpi} {double|float}
 ## Contributors
 
 - Kenji Ono *keno@cc.kyushu-u.ac.jp*
-
+- Masako Iwata
+- Tsuyoshi Tamaki
+- Yasuhiro Kawashima
+- Kei Akasaka
+- Soichiro Suzuki
+- Junya Onishi
+- Ken Uzawa
+- Kazuhiro Hamaguchi
+- Yohei Miyazaki
+- Masashi Imano
 
