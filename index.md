@@ -7,16 +7,15 @@ It is very simple to install this software package into your computer system. If
 ```
 $ tar xvfz avr-aics-riken-ffvc_package-x.x.x.tar.gz
 $ cd avr-aics-riken-ffvc_package-x.x.x
-$ ./install_intel.sh
+$ export CC=... CXX=... F90=... FC=...
+$ ./install.sh <intel|fx10|K> <INST_DIR> {serial|mpi} {double|float}
 ```
 
 ### Copyright
-- Copyright (c) 2007-2011 VCAD System Research Program, RIKEN. 
-  All rights reserved.
-- Copyright (c) 2011-2014 Institute of Industrial Science, The University of Tokyo. 
-  All rights reserved.
-- Copyright (c) 2012-2014 Advanced Institute for Computational Science, RIKEN. 
-  All rights reserved.
+- Copyright (c) 2007-2011 VCAD System Research Program, RIKEN.  All rights reserved.
+- Copyright (c) 2011-2015 Institute of Industrial Science, The University of Tokyo.  All rights reserved.
+- Copyright (c) 2012-2016 Advanced Institute for Computational Science, RIKEN.  All rights reserved.
+- Copyright (c) 2016-2017 Research Institute for Information Technology(RIIT), Kyushu University.  All rights reserved.
 
 ### License
 BSD (2-clause) license
@@ -35,7 +34,7 @@ BSD (2-clause) license
 - Masashi     Imano
 
 ### Support or Contact
-keno@{riken, iis.u-tokyo.ac}.jp
+keno@{cc.kymushu-u.ac, riken}.jp
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
