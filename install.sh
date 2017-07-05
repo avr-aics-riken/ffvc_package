@@ -30,7 +30,7 @@ export PM_LIB=PMlib-5.6.1
 export PL_LIB=Polylib-3.6.5
 export CPM_LIB=CPMlib-2.4.0
 export CDM_LIB=CDMlib-1.1.0
-export FFVC=FFVC-2.5.0
+export FFVC=FFVC-2.5.1
 
 
 
