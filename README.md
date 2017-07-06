@@ -27,7 +27,7 @@ Type install shell script on command line with options .
 
 ~~~
 $ export CC=... CXX=... F90=... FC=...
-$ ./install.sh <intel|fx10|K> <INST_DIR> {serial|mpi} {double|float}
+$ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float}
 ~~~
 
 

@@ -25,12 +25,12 @@
 # Library version
 #
 
-export TP_LIB=TextParser-1.8.2
-export PM_LIB=PMlib-5.6.1
-export PL_LIB=Polylib-3.6.5
-export CPM_LIB=CPMlib-2.4.0
-export CDM_LIB=CDMlib-1.1.0
-export FFVC=FFVC-2.5.1
+export TP_LIB=TextParser-1.8.5
+export PM_LIB=PMlib-5.6.6
+export PL_LIB=Polylib-3.6.7
+export CPM_LIB=CPMlib-2.4.4
+export CDM_LIB=CDMlib-1.1.3
+export FFVC=FFVC-2.5.2
 
 
 
@@ -38,7 +38,7 @@ export FFVC=FFVC-2.5.1
 #
 # Usage
 #
-# $ ./install.sh <intel|fx10|K> <target_dir> {serial|mpi} {double|float}
+# $ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float}
 #
 #######################################
 
@@ -51,12 +51,16 @@ if [ "${target_arch}" = "intel" ]; then
   echo "Target arch       : intel"
 elif [ "${target_arch}" = "fx10" ]; then
   echo "Target arch       : fx10"
-  sparcv9="yes"
+  F_TCS="yes"
   toolchain_file="../cmake/Toolchain_fx10.cmake"
 elif [ "${target_arch}" = "K" ]; then
   echo "Target arch       : K Computer"
-  sparcv9="yes"
+  F_TCS="yes"
   toolchain_file="../cmake/Toolchain_K.cmake"
+elif [ "${target_arch}" = "intel_F_TCS" ]; then
+  echo "Target arch       : Intel Fujitsu TCS env."
+  toolchain_file="../cmake/Toolchain_intel_F_TCS.cmake"
+  F_TCS="yes"
 else
   echo "Target arch       : not supported -- terminate install process"
   exit
@@ -66,23 +70,26 @@ fi
 # Install directory
 #
 target_dir=$2
-echo "Install directory : ${target_dir}"
+
+export INST_DIR=${target_dir}
+echo "Install directory : ${INST_DIR}"
 
 
 # Parallelism
 #
-is_par=$3
+parallel_mode=$3
 
-if [ "${is_par}" = "mpi" ]; then
-  p_mode="yes"
-elif [ "${is_par}" = "serial" ]; then
-  p_mode="no"
+if [ "${parallel_mode}" = "mpi" ]; then
+  echo "Paralle mode.     : ${parallel_mode}"
+  mode_mpi="yes"
+elif [ "${parallel_mode}" = "serial" ]; then
+  echo "Paralle mode.     : ${parallel_mode}"
+  mode_mpi="no"
 else
   echo "Paralle mode.     : Invalid -- terminate install process"
   exit
 fi
 
-echo "Paralle mode.     : ${is_par}"
 
 
 # Floating point Precision
@@ -90,9 +97,9 @@ echo "Paralle mode.     : ${is_par}"
 fp_mode=$4
 
 if [ "${fp_mode}" = "double" ]; then
-  precision=double
+  export PRCSN=double
 elif [ "${fp_mode}" = "float" ]; then
-  precision=float
+  export PRCSN=float
 else
   echo "Invalid argument for floating point  -- terminate install process"
   exit
@@ -117,12 +124,13 @@ if [ ! -d ${TP_LIB} ]; then
   cd ${TP_LIB}/build
 
   if [ "${target_arch}" = "intel" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/TextParser -Dwith_MPI=${p_mode} ..
+    cmake -DINSTALL_DIR=${INST_DIR}/TextParser \
+            -Dwith_MPI=${mode_mpi} ..
 
-  elif [ "${sparcv9}" = "yes" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/TextParser \
-          -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
-          -Dwith_MPI=${p_mode} ..
+  elif [ "${F_TCS}" = "yes" ]; then
+    cmake -DINSTALL_DIR=${INST_DIR}/TextParser \
+            -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
+            -Dwith_MPI=${mode_mpi} ..
   fi
 
   make
@@ -150,23 +158,23 @@ if [ ! -d ${PM_LIB} ]; then
   cd ${PM_LIB}/build
 
   if [ "${target_arch}" = "intel" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/PMlib \
-          -Denable_OPENMP=no \
-          -Dwith_MPI=${p_mode} \
-          -Denable_Fortran=no \
-          -Dwith_example=no \
-          -Dwith_PAPI=no \
-          -Dwith_OTF=no ..
+    cmake -DINSTALL_DIR=${INST_DIR}/PMlib \
+            -Denable_OPENMP=no \
+            -Dwith_MPI=${mode_mpi} \
+            -Denable_Fortran=no \
+            -Dwith_example=no \
+            -Dwith_PAPI=no \
+            -Dwith_OTF=no ..
 
-  elif [ "${sparcv9}" = "yes" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/PMlib \
-          -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
-          -Denable_OPENMP=no \
-          -Dwith_MPI=${p_mode} \
-          -Denable_Fortran=no \
-          -Dwith_example=no \
-          -Dwith_PAPI=no \
-          -Dwith_OTF=no ..
+  elif [ "${F_TCS}" = "yes" ]; then
+    cmake -DINSTALL_DIR=${INST_DIR}/PMlib \
+            -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
+            -Denable_OPENMP=no \
+            -Dwith_MPI=${mode_mpi} \
+            -Denable_Fortran=no \
+            -Dwith_example=no \
+            -Dwith_PAPI=no \
+            -Dwith_OTF=no ..
   fi
 
   make
@@ -193,19 +201,19 @@ if [ ! -d ${PL_LIB} ]; then
   cd ${PL_LIB}/build
 
   if [ "${target_arch}" = "intel" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/Polylib \
-          -Dreal_type=${precision} \
-          -Dwith_MPI=${p_mode} \
+    cmake -DINSTALL_DIR=${INST_DIR}/Polylib \
+          -Dreal_type=${PRCSN} \
+          -Dwith_MPI=${mode_mpi} \
           -Dwith_example=no \
-          -Dwith_TP=${target_dir}/TextParser ..
+          -Dwith_TP=${INST_DIR}/TextParser ..
 
-  elif [ "${sparcv9}" = "yes" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/Polylib \
-          -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
-          -Dreal_type=${precision} \
-          -Dwith_MPI=${p_mode} \
-          -Dwith_example=no \
-          -Dwith_TP=${target_dir}/TextParser ..
+  elif [ "${F_TCS}" = "yes" ]; then
+    cmake -DINSTALL_DIR=${INST_DIR}/PMlib \
+            -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
+            -Dreal_type=${PRCSN} \
+            -Dwith_MPI=${mode_mpi} \
+            -Dwith_example=no \
+            -Dwith_TP=${INST_DIR}/TextParser ..
   fi
 
   make
@@ -234,21 +242,21 @@ if [ ! -d ${CPM_LIB} ]; then
   cd ${CPM_LIB}/build
 
   if [ "${target_arch}" = "intel" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/CPMlib \
-          -Dwith_MPI=${p_mode} \
-          -Dreal_type=${precision} \
-          -Denable_LMR=no \
-          -Dwith_example=no \
-          -Dwith_TP=${target_dir}/TextParser ..
+    cmake -DINSTALL_DIR=${INST_DIR}/CPMlib \
+            -Dwith_MPI=${mode_mpi} \
+            -Dreal_type=${PRCSN} \
+            -Denable_LMR=no \
+            -Dwith_example=no \
+            -Dwith_TP=${INST_DIR}/TextParser ..
 
-  elif [ "${sparcv9}" = "yes" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/CPMlib \
-          -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
-          -Dwith_MPI=${p_mode} \
-          -Dreal_type=${precision} \
-          -Denable_LMR=no \
-          -Dwith_example=no \
-          -Dwith_TP=${target_dir}/TextParser ..
+  elif [ "${F_TCS}" = "yes" ]; then
+    cmake -DINSTALL_DIR=${INST_DIR}/CPMlib \
+            -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
+            -Dwith_MPI=${mode_mpi} \
+            -Dreal_type=${PRCSN} \
+            -Denable_LMR=no \
+            -Dwith_example=no \
+            -Dwith_TP=${INST_DIR}/TextParser ..
   fi
 
   make
@@ -276,25 +284,27 @@ if [ ! -d ${CDM_LIB} ]; then
   cd ${CDM_LIB}/build
 
   if [ "${target_arch}" = "intel" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/CDMlib \
-          -Dwith_MPI=${p_mode} \
-          -Dwith_example=no \
-          -Dwith_util=yes \
-          -Dwith_TP=${target_dir}/TextParser \
-          -Dwith_CPM=${target_dir}/CPMlib \
-          -Dwith_NetCDF=no \
-          -Denable_BUFFER_SIZE=no ..
+    cmake -DINSTALL_DIR=${INST_DIR}/CDMlib \
+            -Dwith_MPI=${mode_mpi} \
+            -Dwith_example=no \
+            -Dwith_util=yes \
+            -Dwith_TP=${INST_DIR}/TextParser \
+            -Dwith_CPM=${INST_DIR}/CPMlib \
+            -Dwith_NetCDF=no \
+            -Dwith_HDF=no \
+            -Denable_BUFFER_SIZE=no ..
 
-  elif [ "${sparcv9}" = "yes" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/CDMlib \
-          -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
-          -Dwith_MPI=${p_mode} \
-          -Dwith_example=no \
-          -Dwith_util=yes \
-          -Dwith_TP=${target_dir}/TextParser \
-          -Dwith_CPM=${target_dir}/CPMlib \
-          -Dwith_NetCDF=no \
-          -Denable_BUFFER_SIZE=no ..
+  elif [ "${F_TCS}" = "yes" ]; then
+    cmake -DINSTALL_DIR=${INST_DIR}/CDMlib \
+            -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
+            -Dwith_MPI=${mode_mpi} \
+            -Dwith_example=no \
+            -Dwith_util=yes \
+            -Dwith_TP=${INST_DIR}/TextParser \
+            -Dwith_CPM=${INST_DIR}/CPMlib \
+            -Dwith_NetCDF=no \
+            -Dwith_HDF=no \
+            -Denable_BUFFER_SIZE=no ..
   fi
 
   make
@@ -323,27 +333,27 @@ if [ ! -d ${FFVC} ]; then
   cd ${FFVC}/build
 
   if [ "${target_arch}" = "intel" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/FFVC \
-          -Dreal_type=${precision} \
+    cmake -DINSTALL_DIR=${INST_DIR}/FFVC \
+          -Dreal_type=${PRCSN} \
           -Denable_OPENMP=yes \
-          -Dwith_MPI=${p_mode} \
-          -Dwith_TP=${target_dir}/TextParser \
-          -Dwith_PM=${target_dir}/PMlib \
-          -Dwith_PL=${target_dir}/Polylib \
-          -Dwith_CPM=${target_dir}/CPMlib \
-          -Dwith_CDM=${target_dir}/CDMlib ..
+          -Dwith_MPI=${mode_mpi} \
+          -Dwith_TP=${INST_DIR}/TextParser \
+          -Dwith_PM=${INST_DIR}/PMlib \
+          -Dwith_PL=${INST_DIR}/Polylib \
+          -Dwith_CPM=${INST_DIR}/CPMlib \
+          -Dwith_CDM=${INST_DIR}/CDMlib ..
 
-  elif [ "${sparcv9}" = "yes" ]; then
-    cmake -DINSTALL_DIR=${target_dir}/FFVC \
+  elif [ "${F_TCS}" = "yes" ]; then
+    cmake -DINSTALL_DIR=${INST_DIR}/FFVC \
           -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
-          -Dreal_type=${precision} \
+          -Dreal_type=${PRCSN} \
           -Denable_OPENMP=yes \
-          -Dwith_MPI=${p_mode} \
-          -Dwith_TP=${target_dir}/TextParser \
-          -Dwith_PM=${target_dir}/PMlib \
-          -Dwith_PL=${target_dir}/Polylib \
-          -Dwith_CPM=${target_dir}/CPMlib \
-          -Dwith_CDM=${target_dir}/CDMlib ..
+          -Dwith_MPI=${mode_mpi} \
+          -Dwith_TP=${INST_DIR}/TextParser \
+          -Dwith_PM=${INST_DIR}/PMlib \
+          -Dwith_PL=${INST_DIR}/Polylib \
+          -Dwith_CPM=${INST_DIR}/CPMlib \
+          -Dwith_CDM=${INST_DIR}/CDMlib ..
   fi
 
   make
