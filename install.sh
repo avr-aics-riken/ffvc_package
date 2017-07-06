@@ -208,7 +208,7 @@ if [ ! -d ${PL_LIB} ]; then
           -Dwith_TP=${INST_DIR}/TextParser ..
 
   elif [ "${F_TCS}" = "yes" ]; then
-    cmake -DINSTALL_DIR=${INST_DIR}/PMlib \
+    cmake -DINSTALL_DIR=${INST_DIR}/Polylib \
             -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
             -Dreal_type=${PRCSN} \
             -Dwith_MPI=${mode_mpi} \
