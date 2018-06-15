@@ -18,6 +18,14 @@ A package of FFVC with related libraries.
 
 
 ## RELEASE HISTORY
+
+---
+- 2018-06-15 Version 2.5.3
+  - modify install.sh
+  - Polylib-3.7.0
+  - FFVC-2.5.2
+
+
 ---
 - 2017-07-06 Version 2.5.2
   - modify install.sh

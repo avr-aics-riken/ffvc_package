@@ -27,10 +27,10 @@
 
 export TP_LIB=TextParser-1.8.5
 export PM_LIB=PMlib-5.6.6
-export PL_LIB=Polylib-3.6.7
+export PL_LIB=Polylib-3.7.0
 export CPM_LIB=CPMlib-2.4.4
 export CDM_LIB=CDMlib-1.1.3
-export FFVC=FFVC-2.5.2
+export FFVC=FFVC-2.5.3
 
 
 
