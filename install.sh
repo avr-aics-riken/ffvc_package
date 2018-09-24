@@ -30,7 +30,7 @@ export PM_LIB=PMlib-6.2.2
 export PL_LIB=Polylib-3.7.1
 export CPM_LIB=CPMlib-2.4.4
 export CDM_LIB=CDMlib-1.1.3
-export FFVC=FFVC-2.5.4
+export FFVC=FFVC-2.5.5
 
 
 
@@ -38,7 +38,7 @@ export FFVC=FFVC-2.5.4
 #
 # Usage
 #
-# $ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float}
+# $ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float} {papi=on/papi=off}
 #
 #######################################
 
@@ -109,6 +109,23 @@ echo "Precision         : ${fp_mode}"
 echo " "
 
 
+# PAPI
+#
+hwpc=$5
+
+if [ "${hwpc}" = "papi=on" ]; then
+  export PAPI=${INST_DIR}/RC/PAPI
+elif [ "${hwpc}" = "papi=off" ]; then
+  export PAPI=OFF
+else
+  echo "Invalid argument for papi  -- terminate install process"
+  exit
+fi
+
+echo "PAPI              : ${hwpc}"
+echo " "
+
+
 #######################################
 
 
@@ -163,7 +180,7 @@ if [ ! -d ${PM_LIB} ]; then
             -Dwith_MPI=${mode_mpi} \
             -Denable_Fortran=no \
             -Dwith_example=no \
-            -Dwith_PAPI=no \
+            -Dwith_PAPI=${PAPI} \
             -Dwith_OTF=no \
             -Denable_PreciseTimer=yes ..
 
@@ -174,7 +191,7 @@ if [ ! -d ${PM_LIB} ]; then
             -Dwith_MPI=${mode_mpi} \
             -Denable_Fortran=no \
             -Dwith_example=no \
-            -Dwith_PAPI=no \
+            -Dwith_PAPI=${PAPI} \
             -Dwith_OTF=no \
             -Denable_PreciseTimer=yes ..
   fi
@@ -341,6 +358,7 @@ if [ ! -d ${FFVC} ]; then
           -Dwith_MPI=${mode_mpi} \
           -Dwith_TP=${INST_DIR}/TextParser \
           -Dwith_PM=${INST_DIR}/PMlib \
+          -Dwith_PAPI=${PAPI} \
           -Dwith_PL=${INST_DIR}/Polylib \
           -Dwith_CPM=${INST_DIR}/CPMlib \
           -Dwith_CDM=${INST_DIR}/CDMlib ..
@@ -353,6 +371,7 @@ if [ ! -d ${FFVC} ]; then
           -Dwith_MPI=${mode_mpi} \
           -Dwith_TP=${INST_DIR}/TextParser \
           -Dwith_PM=${INST_DIR}/PMlib \
+          -Dwith_PAPI=${PAPI} \
           -Dwith_PL=${INST_DIR}/Polylib \
           -Dwith_CPM=${INST_DIR}/CPMlib \
           -Dwith_CDM=${INST_DIR}/CDMlib ..

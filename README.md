@@ -20,6 +20,7 @@ Release package of FFVC and related libraries.
 - Polylib (included in this package)
 - CPMlib (included in this package)
 - CDMlib (included in this package)
+- PAPI (option)
 
 
 ## Install
@@ -27,7 +28,7 @@ Type install shell script on command line with options .
 
 ~~~
 $ export CC=... CXX=... F90=... FC=...
-$ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float}
+$ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float} papi={off|on}
 ~~~
 
 
@@ -44,8 +45,23 @@ $ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float}
 ~~~
 $ module load intel/2018.3 openmpi/2.1.3-nocuda-intel18.0
 $ export CC=mpiicc CXX=mpiicpc F90=mpiifort FC=mpiifort
-$ ./install intel ${HOME}/FFV mpi float 
+$ ./install intel ${HOME}/FFV mpi float papi=on
 $ mpiexec.hydra -n 8 ./ffvc-mpi hoge.tp
+~~~
+
+### TCS
+
+#### PAPI
+~~~
+$ export CC=mpifcc CXX=mpiFCC F77=mpifrt CFLAGS=-Xg CXXFLAGS=-Xg
+$ ./configure --prefix=${HOME}/FFV/PAPI
+$ make
+$ make install
+~~~
+
+#### FFVC
+~~~
+$ ./install intel_F_TCS ${HOME}/FFV mpi float papi=on
 ~~~
 
 

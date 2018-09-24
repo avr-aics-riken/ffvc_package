@@ -3,21 +3,19 @@
 A package of FFVC with related libraries.
 
 
-## COMPILED
-
-
-|Environment|Serial|MPI |Host|
-|:--|:--:|:--:|:--|
-|Intel / Intel 17.0.1 ||ok^(1)|Apple MacBook Pro OSX 10.12.4|
-|Intel / GNU 6.2.0    ||ok^(1)|Apple MacBook Pro OSX 10.12.4|
-|Fujitsu / fx10       ||ok|Hayaka /opt/FJSVfxlang/1.2.1|
-|Fujitsu / fx100      ||ok|
-|Fujitsu / K          ||ok|
-
- - ^(1) OpenMPI 1.10.4
-
 
 ## RELEASE HISTORY
+
+---
+- 2018-09-24 Version 2.5.5
+  - FFVC-2.5.5
+  - PAPI
+
+
+---
+- 2018-09-24 Version 2.5.4
+  - FFVC-2.5.4
+
 
 ---
 - 2018-06-15 Version 2.5.3
