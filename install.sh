@@ -25,12 +25,12 @@
 # Library version
 #
 
-export TP_LIB=TextParser-1.8.5
-export PM_LIB=PMlib-5.6.6
-export PL_LIB=Polylib-3.7.0
+export TP_LIB=TextParser-1.8.7
+export PM_LIB=PMlib-6.2.2
+export PL_LIB=Polylib-3.7.1
 export CPM_LIB=CPMlib-2.4.4
 export CDM_LIB=CDMlib-1.1.3
-export FFVC=FFVC-2.5.3
+export FFVC=FFVC-2.5.4
 
 
 
@@ -159,22 +159,24 @@ if [ ! -d ${PM_LIB} ]; then
 
   if [ "${target_arch}" = "intel" ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/PMlib \
-            -Denable_OPENMP=no \
+            -Denable_OPENMP=yes \
             -Dwith_MPI=${mode_mpi} \
             -Denable_Fortran=no \
             -Dwith_example=no \
             -Dwith_PAPI=no \
-            -Dwith_OTF=no ..
+            -Dwith_OTF=no \
+            -Denable_PreciseTimer=yes ..
 
   elif [ "${F_TCS}" = "yes" ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/PMlib \
             -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
-            -Denable_OPENMP=no \
+            -Denable_OPENMP=yes \
             -Dwith_MPI=${mode_mpi} \
             -Denable_Fortran=no \
             -Dwith_example=no \
             -Dwith_PAPI=no \
-            -Dwith_OTF=no ..
+            -Dwith_OTF=no \
+            -Denable_PreciseTimer=yes ..
   fi
 
   make

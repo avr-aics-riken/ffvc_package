@@ -38,6 +38,16 @@ $ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float}
 * Sparc fx arch. and Fujitsu compiler.
 
 
+## Kyushu University ITO system
+
+### Intel
+~~~
+$ module load intel/2018.3 openmpi/2.1.3-nocuda-intel18.0
+$ export CC=mpiicc CXX=mpiicpc F90=mpiifort FC=mpiifort
+$ ./install intel ${HOME}/FFV mpi float 
+$ mpiexec.hydra -n 8 ./ffvc-mpi hoge.tp
+~~~
+
 
 ## Contributors
 
