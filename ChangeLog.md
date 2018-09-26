@@ -7,6 +7,16 @@ A package of FFVC with related libraries.
 ## RELEASE HISTORY
 
 ---
+- 2018-09-25 Version 2.6.0
+  - FFVC-2.5.6
+  - TextParser-1.8.8
+  - PMlib-6.2.3
+  - Polylib-3.7.2
+  - CDMlib-1.1.5
+  - CPMlib-2.4.5
+
+
+---
 - 2018-09-24 Version 2.5.5
   - FFVC-2.5.5
   - PAPI

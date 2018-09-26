@@ -25,12 +25,12 @@
 # Library version
 #
 
-export TP_LIB=TextParser-1.8.7
-export PM_LIB=PMlib-6.2.2
-export PL_LIB=Polylib-3.7.1
-export CPM_LIB=CPMlib-2.4.4
-export CDM_LIB=CDMlib-1.1.3
-export FFVC=FFVC-2.5.5
+export TP_LIB=TextParser-1.8.8
+export PM_LIB=PMlib-6.2.3
+export PL_LIB=Polylib-3.7.2
+export CPM_LIB=CPMlib-2.4.5
+export CDM_LIB=CDMlib-1.1.5
+export FFVC=FFVC-2.5.6
 
 
 
@@ -114,7 +114,7 @@ echo " "
 hwpc=$5
 
 if [ "${hwpc}" = "papi=on" ]; then
-  export PAPI=${INST_DIR}/RC/PAPI
+  export PAPI=${INST_DIR}/PAPI
 elif [ "${hwpc}" = "papi=off" ]; then
   export PAPI=OFF
 else
@@ -309,8 +309,8 @@ if [ ! -d ${CDM_LIB} ]; then
             -Dwith_util=yes \
             -Dwith_TP=${INST_DIR}/TextParser \
             -Dwith_CPM=${INST_DIR}/CPMlib \
-            -Dwith_NetCDF=no \
-            -Dwith_HDF=no \
+            -Dwith_NetCDF=OFF \
+            -Dwith_HDF=OFF \
             -Denable_BUFFER_SIZE=no ..
 
   elif [ "${F_TCS}" = "yes" ]; then
@@ -321,8 +321,8 @@ if [ ! -d ${CDM_LIB} ]; then
             -Dwith_util=yes \
             -Dwith_TP=${INST_DIR}/TextParser \
             -Dwith_CPM=${INST_DIR}/CPMlib \
-            -Dwith_NetCDF=no \
-            -Dwith_HDF=no \
+            -Dwith_NetCDF=OFF \
+            -Dwith_HDF=OFF \
             -Denable_BUFFER_SIZE=no ..
   fi
 
