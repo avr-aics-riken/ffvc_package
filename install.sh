@@ -13,7 +13,7 @@
 # Copyright (c) 2012-2016 Advanced Institute for Computational Science, RIKEN.
 # All rights reserved.
 #
-# Copyright (c) 2016-2017 Research Institute for Information Technology(RIIT),
+# Copyright (c) 2016-2018 Research Institute for Information Technology(RIIT),
 # Kyushu University.
 # All rights reserved.
 #
@@ -30,7 +30,7 @@ export PM_LIB=PMlib-6.2.3
 export PL_LIB=Polylib-3.7.2
 export CPM_LIB=CPMlib-2.4.5
 export CDM_LIB=CDMlib-1.1.5
-export FFVC=FFVC-2.5.6
+export FFVC=FFVC-2.5.7
 
 
 
@@ -38,7 +38,7 @@ export FFVC=FFVC-2.5.6
 #
 # Usage
 #
-# $ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float} {papi=on/papi=off}
+# $ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float} {papi=on|papi=off}
 #
 #######################################
 
@@ -49,8 +49,8 @@ target_arch=$1
 
 if [ "${target_arch}" = "intel" ]; then
   echo "Target arch       : intel"
-elif [ "${target_arch}" = "fx10" ]; then
-  echo "Target arch       : fx10"
+elif [ "${target_arch}" = "fx100" ]; then
+  echo "Target arch       : fx100"
   F_TCS="yes"
   toolchain_file="../cmake/Toolchain_fx10.cmake"
 elif [ "${target_arch}" = "K" ]; then
@@ -81,10 +81,10 @@ parallel_mode=$3
 
 if [ "${parallel_mode}" = "mpi" ]; then
   echo "Paralle mode.     : ${parallel_mode}"
-  mode_mpi="yes"
+  mpi_sw="yes"
 elif [ "${parallel_mode}" = "serial" ]; then
   echo "Paralle mode.     : ${parallel_mode}"
-  mode_mpi="no"
+  mpi_sw="no"
 else
   echo "Paralle mode.     : Invalid -- terminate install process"
   exit
@@ -142,12 +142,12 @@ if [ ! -d ${TP_LIB} ]; then
 
   if [ "${target_arch}" = "intel" ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/TextParser \
-            -Dwith_MPI=${mode_mpi} ..
+            -Dwith_MPI=${mpi_sw} ..
 
   elif [ "${F_TCS}" = "yes" ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/TextParser \
             -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
-            -Dwith_MPI=${mode_mpi} ..
+            -Dwith_MPI=${mpi_sw} ..
   fi
 
   make
@@ -177,7 +177,7 @@ if [ ! -d ${PM_LIB} ]; then
   if [ "${target_arch}" = "intel" ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/PMlib \
             -Denable_OPENMP=yes \
-            -Dwith_MPI=${mode_mpi} \
+            -Dwith_MPI=${mpi_sw} \
             -Denable_Fortran=no \
             -Dwith_example=no \
             -Dwith_PAPI=${PAPI} \
@@ -188,7 +188,7 @@ if [ ! -d ${PM_LIB} ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/PMlib \
             -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
             -Denable_OPENMP=yes \
-            -Dwith_MPI=${mode_mpi} \
+            -Dwith_MPI=${mpi_sw} \
             -Denable_Fortran=no \
             -Dwith_example=no \
             -Dwith_PAPI=${PAPI} \
@@ -222,7 +222,7 @@ if [ ! -d ${PL_LIB} ]; then
   if [ "${target_arch}" = "intel" ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/Polylib \
           -Dreal_type=${PRCSN} \
-          -Dwith_MPI=${mode_mpi} \
+          -Dwith_MPI=${mpi_sw} \
           -Dwith_example=no \
           -Dwith_TP=${INST_DIR}/TextParser ..
 
@@ -230,7 +230,7 @@ if [ ! -d ${PL_LIB} ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/Polylib \
             -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
             -Dreal_type=${PRCSN} \
-            -Dwith_MPI=${mode_mpi} \
+            -Dwith_MPI=${mpi_sw} \
             -Dwith_example=no \
             -Dwith_TP=${INST_DIR}/TextParser ..
   fi
@@ -262,7 +262,7 @@ if [ ! -d ${CPM_LIB} ]; then
 
   if [ "${target_arch}" = "intel" ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/CPMlib \
-            -Dwith_MPI=${mode_mpi} \
+            -Dwith_MPI=${mpi_sw} \
             -Dreal_type=${PRCSN} \
             -Denable_LMR=no \
             -Dwith_example=no \
@@ -271,7 +271,7 @@ if [ ! -d ${CPM_LIB} ]; then
   elif [ "${F_TCS}" = "yes" ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/CPMlib \
             -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
-            -Dwith_MPI=${mode_mpi} \
+            -Dwith_MPI=${mpi_sw} \
             -Dreal_type=${PRCSN} \
             -Denable_LMR=no \
             -Dwith_example=no \
@@ -304,7 +304,7 @@ if [ ! -d ${CDM_LIB} ]; then
 
   if [ "${target_arch}" = "intel" ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/CDMlib \
-            -Dwith_MPI=${mode_mpi} \
+            -Dwith_MPI=${mpi_sw} \
             -Dwith_example=no \
             -Dwith_util=yes \
             -Dwith_TP=${INST_DIR}/TextParser \
@@ -316,7 +316,7 @@ if [ ! -d ${CDM_LIB} ]; then
   elif [ "${F_TCS}" = "yes" ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/CDMlib \
             -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
-            -Dwith_MPI=${mode_mpi} \
+            -Dwith_MPI=${mpi_sw} \
             -Dwith_example=no \
             -Dwith_util=yes \
             -Dwith_TP=${INST_DIR}/TextParser \
@@ -355,7 +355,7 @@ if [ ! -d ${FFVC} ]; then
     cmake -DINSTALL_DIR=${INST_DIR}/FFVC \
           -Dreal_type=${PRCSN} \
           -Denable_OPENMP=yes \
-          -Dwith_MPI=${mode_mpi} \
+          -Dwith_MPI=${mpi_sw} \
           -Dwith_TP=${INST_DIR}/TextParser \
           -Dwith_PM=${INST_DIR}/PMlib \
           -Dwith_PAPI=${PAPI} \
@@ -368,7 +368,7 @@ if [ ! -d ${FFVC} ]; then
           -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
           -Dreal_type=${PRCSN} \
           -Denable_OPENMP=yes \
-          -Dwith_MPI=${mode_mpi} \
+          -Dwith_MPI=${mpi_sw} \
           -Dwith_TP=${INST_DIR}/TextParser \
           -Dwith_PM=${INST_DIR}/PMlib \
           -Dwith_PAPI=${PAPI} \

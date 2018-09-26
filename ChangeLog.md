@@ -7,6 +7,11 @@ A package of FFVC with related libraries.
 ## RELEASE HISTORY
 
 ---
+- 2018-09-27 Version 2.6.1
+  - FFVC-2.5.7
+
+
+---
 - 2018-09-25 Version 2.6.0
   - FFVC-2.5.6
   - TextParser-1.8.8
