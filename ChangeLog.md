@@ -7,6 +7,11 @@ A package of FFVC with related libraries.
 ## RELEASE HISTORY
 
 ---
+- 2018-11-27 Version 2.6.2
+  - FFVC-2.5.9
+
+
+---
 - 2018-09-27 Version 2.6.1
   - FFVC-2.5.7
 
