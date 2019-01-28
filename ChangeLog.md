@@ -8,6 +8,10 @@ A package of FFVC with related libraries.
 
 
 ---
+- 2019-01-28 Version 2.6.5
+- FFVC-2.8.3
+
+---
 - 2019-01-27 Version 2.6.4
 - FFVC-2.8.2
 
