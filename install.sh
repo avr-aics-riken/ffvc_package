@@ -26,11 +26,11 @@
 #
 
 export TP_LIB=TextParser-1.8.8
-export PM_LIB=PMlib-6.2.3
+export PM_LIB=PMlib-6.4.2
 export PL_LIB=Polylib-3.7.2
 export CPM_LIB=CPMlib-2.4.5
 export CDM_LIB=CDMlib-1.1.5
-export FFVC=FFVC-2.8.3
+export FFVC=FFVC-2.9.2
 
 
 

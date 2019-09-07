@@ -6,6 +6,11 @@ A package of FFVC with related libraries.
 
 ## RELEASE HISTORY
 
+---
+- 2019-09-07 Version 2.6.6
+- FFVC-2.9.1
+- PMlib-6.4.2
+
 
 ---
 - 2019-01-28 Version 2.6.5

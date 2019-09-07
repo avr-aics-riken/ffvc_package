@@ -42,12 +42,26 @@ $ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float}
 ## Kyushu University ITO system
 
 ### Intel
+
+#### PAPI
+
 ~~~
-$ module load intel/2018.3 openmpi/2.1.3-nocuda-intel18.0
-$ export CC=mpiicc CXX=mpiicpc F90=mpiifort FC=mpiifort
-$ ./install intel ${HOME}/FFV mpi float papi=on
-$ mpiexec.hydra -n 8 ./ffvc-mpi hoge.tp
+	$ module load intel/2018.3 openmpi/2.1.3-nocuda-intel18.0
+	$ export CC=mpiicc CXX=mpiicpc F90=mpiifort FC=mpiifort
+ 	$ ./configure --prefix=${HOME}/FFV/PAPI
+ 	$ make && make install
 ~~~
+
+#### ffvc_package
+
+~~~
+	$ module load intel/2018.3 openmpi/2.1.3-nocuda-intel18.0
+	$ export CC=mpiicc CXX=mpiicpc F90=mpiifort FC=mpiifort
+	$ ./install intel ${HOME}/FFV mpi float papi=on
+	$ mpiexec.hydra -n 8 ./ffvc-mpi hoge.tp
+~~~
+
+---
 
 ### TCS
 
