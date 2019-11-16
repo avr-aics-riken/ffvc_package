@@ -31,6 +31,14 @@ $ export CC=... CXX=... F90=... FC=...
 $ ./install.sh <intel|fx10|K|intel_F_TCS> <INST_DIR> {serial|mpi} {double|float} papi={off|on}
 ~~~
 
+Examples
+
+~~~
+MAC gcc mpi
+$ export CC=mpicc CXX=mpicxx F90=mpif90 FC=mpif90
+$ ./install.sh intel ${HOME}/FFVC mpi float papi=off
+~~~
+
 
 ## Supported platforms and compilers
 
